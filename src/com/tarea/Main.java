@@ -13,23 +13,22 @@ public class Main {
     private static final AVLManager AVLmanager = new AVLManager();
     private static final com.tarea.gestor.BManager BManager = new BManager();
     private static BMasGestor<String, Persona> personas;
-
+    private static RedBlackTreeGestor redBlackTreeGestor = new RedBlackTreeGestor();
     private static final BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
     public static void main(String[] args) throws IOException ,SerializadorException, ArbolException{
-        RedBlackTreeGestor bst = new RedBlackTreeGestor();
-        bst.insert(8);
-        bst.insert(18);
-        bst.insert(5);
-        bst.insert(15);
-        bst.insert(17);
-        bst.insert(25);
-        bst.insert(40);
-        bst.insert(80);
-        bst.delete(25);
-        bst.prettyPrint();
+
+
 
         try{
+            redBlackTreeGestor.insert(8);
+            redBlackTreeGestor.insert(18);
+            redBlackTreeGestor.insert(5);
+            redBlackTreeGestor.insert(15);
+            redBlackTreeGestor.insert(17);
+            redBlackTreeGestor.insert(25);
+            redBlackTreeGestor.insert(40);
+            redBlackTreeGestor.insert(80);
             personas=new BMasGestor("src/","personas",200);
 
             personas.agregar("Cedula1",new Persona("Cedula1","Nombre1"));
@@ -64,6 +63,9 @@ public class Main {
             System.out.println("8. Buscar una cedula en el arbol B+");
             System.out.println("9. Eliminar una persona del arbol B+");
             System.out.println("10. Listar objetos en el arbol B+");
+            System.out.println("11. Agregar un nodo al arbol rojo y negro");
+            System.out.println("12. Mostrar arbol rojo y negro");
+            System.out.println("13. Eliminar un nodo del arbol rojo y negro");
             option = selectOption();
             executeOption(option);
         } while(option != 0);
@@ -111,6 +113,15 @@ public class Main {
             case 10:
                 listarBMas();
                 break;
+            case 11:
+                insertBlackRedTree();
+                break;
+            case 12:
+                redBlackTreeGestor.prettyPrint();
+                break;
+            case 13:
+                deleteBlackRedTree();
+                break;
             default:
                 System.out.println("Seleccione una opcion valida");
         }
@@ -149,6 +160,18 @@ public class Main {
         System.out.println("Digite el numero que desea agregar al arbol AVL");
         int x = Integer.parseInt(in.readLine());
         AVLmanager.insert(x);
+    }
+
+    private static void insertBlackRedTree() throws IOException{
+        System.out.println("Digite el numero que desea agregar al arbol rojo y negro");
+        int x = Integer.parseInt(in.readLine());
+        redBlackTreeGestor.insert(x);
+    }
+
+    public static void deleteBlackRedTree() throws IOException{
+        System.out.println("Digite el numero que desea eliminar del arbol");
+        int x = Integer.parseInt(in.readLine());
+        redBlackTreeGestor.delete(x);
     }
 
     private static void insertBTree() throws IOException{
